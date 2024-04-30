@@ -1,0 +1,25 @@
+{
+  "events": [
+    {
+      "ID": "1",
+      "Name": "Event 1",
+      "Date": "2002-03-11T00:00:00Z",
+      "TotalTickets": 100,
+      "AvailableTickets": 50
+    },
+    {
+      "ID": "2",
+      "Name": "Event 2",
+      "Date": "2002-03-12T00:00:00Z",
+      "TotalTickets": 200,
+      "AvailableTickets": 100
+    },
+    {
+      "ID": "3",
+      "Name": "Event 3",
+      "Date": "2002-03-13T00:00:00Z",
+      "TotalTickets": 300,
+      "AvailableTickets": 150
+    }
+  ]
+}
