@@ -140,6 +140,25 @@ The `sync.Map` employs a caching strategy to optimize read operations. When a ke
 
 ## Structure and Implementation
 
+A Concurrent Ticket Reservation System is designed to handle multiple users simultaneously attempting to book tickets or reserve seats for events. These systems need to manage seat availability, prevent conflicts, and ensure smooth user experiences. Here, we explain the structure and implementation of our simulated ticket reservation system:
+
+### Ticket
+
+We have a simple Go struct named `Ticket`:
+
+```go
+type Ticket struct {
+	ID      string
+	EventID string
+}
+```
+
+It has two fields:
+
+- `ID`: A string representing the unique identifier for the ticket.
+- `EventID`: A string representing the unique identifier for the event associated with this ticket.
+
+
 ## Results
 
 The outcomes of each code functionality are displayed in the images below:
