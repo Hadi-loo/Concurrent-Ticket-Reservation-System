@@ -184,6 +184,33 @@ type Event struct {
 
 The `Mu` field is a synchronization primitive that allows multiple readers or a single writer to access the event data concurrently. It ensures thread safety when reading or modifying the event properties. For example, when booking a ticket, the system would acquire a write lock (`Mu.Lock()`) to update the AvailableTickets count atomically. Similarly, when checking available tickets, the system would acquire a read lock (`Mu.RLock()`) to prevent concurrent writes during the read operation.
 
+### Database
+
+Our database consists of a JSON file named `events.json`. Here is an example of the contents of this file:
+
+```json
+{
+  "events": [
+    {
+      "ID": "1",
+      "Name": "Event 1",
+      "Date": "2002-03-11T00:00:00Z",
+      "TotalTickets": 100,
+      "AvailableTickets": 50
+    },
+    {
+      "ID": "2",
+      "Name": "Event 2",
+      "Date": "2002-03-12T00:00:00Z",
+      "TotalTickets": 200,
+      "AvailableTickets": 100
+    },
+  ]
+}
+```
+
+The JSON file describes three events, each with an ID, name, date, total ticket count, and available ticket count. It’s a simple representation of event data.
+
 
 ## Results
 
