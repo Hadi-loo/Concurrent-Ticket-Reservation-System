@@ -1,14 +1,21 @@
 # Concurrent Ticket Reservation System
 
+In this project, we have developed a server-client model for ticket reservation using the Go programming language. The server possesses the capability to manage multiple client requests concurrently, thus enabling concurrency control over both server and client connections. Additionally, we have incorporated a caching system to optimize the handling of regularly recurring requests.
+
 - [Requirements](#requirements)
 - [Structure and Implementation](#structure-and-implementation)
 - [Results](#results)
+  - [Start Terminal](#start-terminal)
+  - [Help Command](#help-command)
+  - [List Command](#list-command)
+  - [Book Command](#book-command)
+  - [Create Command](#create-command)
 - [How to run](#how-to-run)
 - [Contributions](#contributions)
 
 ## Requirements
 
-For this project, the installation of the Go programming language is required. Additionally, the dependencies for gRPC packages are specified in the go.mod file, as illustrated in the following box:
+For this project, the installation of the Go programming language is required. also we need uuid package inorder to generate uniquely identify entities without centralized coordination:
 
 ```go
 module Ticket_Resevation
@@ -26,7 +33,7 @@ go mod download
 ## Structure and Implementation
 ## Results
 
-To obtain results for all four methods, the server and client files are executed, after which requests are dispatched for each method accordingly:
+The outcomes of each code functionality are displayed in the images below:
 
 ### Start Terminal
 
@@ -62,7 +69,7 @@ list
 #### Server 
 ![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/b52c6f08-3f76-49ab-b586-4949ae822d40)
 
-### Book command
+### Book Command
 
 With the following command, you can book tickets for your intended Event:
 
@@ -79,7 +86,7 @@ book [Event_ID] [Number of Tickets]
 #### server
 ![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/f15ffbd2-6806-4a59-904c-ca892d982f29)
 
-### Create command
+### Create Command
 
 With the following command, you can generate an Event with the specified details:
 
