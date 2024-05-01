@@ -158,6 +158,32 @@ It has two fields:
 - `ID`: A string representing the unique identifier for the ticket.
 - `EventID`: A string representing the unique identifier for the event associated with this ticket.
 
+### Event
+
+The `Event` struct represents an event. It is likely part of a larger system (ticket reservation system) where events need to be tracked.
+
+```go
+type Event struct {
+	ID               string
+	Name             string
+	Date             time.Time
+	TotalTickets     int
+	AvailableTickets int
+	Mu               sync.RWMutex
+}
+```
+
+`Event` has several fields:
+
+- `ID`: A string representing the unique identifier for the event.
+- `Name`: A string containing the name or title of the event.
+- `Date`: A `time.Time` value indicating the date and time of the event.
+- `TotalTickets`: An integer representing the total number of tickets for the event.
+- `AvailableTickets`: An integer representing the number of tickets currently available (not yet booked or reserved).
+- `Mu`: A sync.RWMutex (read-write mutex) used for managing concurrent access to the event data.
+
+The `Mu` field is a synchronization primitive that allows multiple readers or a single writer to access the event data concurrently. It ensures thread safety when reading or modifying the event properties. For example, when booking a ticket, the system would acquire a write lock (`Mu.Lock()`) to update the AvailableTickets count atomically. Similarly, when checking available tickets, the system would acquire a read lock (`Mu.RLock()`) to prevent concurrent writes during the read operation.
+
 
 ## Results
 
