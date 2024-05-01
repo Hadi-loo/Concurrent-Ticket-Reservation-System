@@ -211,6 +211,62 @@ Our database consists of a JSON file named `events.json`. Here is an example of 
 
 The JSON file describes three events, each with an ID, name, date, total ticket count, and available ticket count. It’s a simple representation of event data.
 
+### TicketService
+
+The `TicketService` struct represents a service responsible for managing ticket-related operations. It has two fields:
+
+- `Events`: A sync.Map used to store event data (keyed by event ID).
+- `mu`: A `sync.RWMutex` (read-write mutex) used for managing concurrent access to the Events map.
+
+Now we will examine the functions and methods related to this service:
+
+`InitTicketService()`:
+
+This method initializes the `TicketService` by reading event data from a JSON file.
+
+- Acquires a write lock (`mu.Lock()`) to ensure exclusive access during initialization.
+- Converting the data into a struct that contains an array of events.
+- Stores each event in the Events map using its ID as the key.
+- Logs a message indicating successful initialization.
+  
+`Save()`:
+
+The `Save` method saves the current state of the `TicketService` (events) back to a JSON file.
+
+- Iterates through the events stored in the `Events` map.
+- Acquires a write lock (`mu.Lock()`) to prevent concurrent modifications during saving.
+- Writes the JSON data to the specified file (either for Linux or Windows).
+- Logs a message indicating successful saving.
+
+`CreateEvent()`:
+
+This method creates a new event and adds it to the `Events` map.
+
+- Creates a new event, initializes the event with the provided name, date, and total ticket count, and adds it to the `Events` map.
+- Acquires a write lock (`ts.mu.Lock()`) to ensure exclusive access during event creation.
+- Generates a unique event ID using a utility function (`Utils.GenerateUUID()`).
+- Returns the created event and a potential error.
+
+`ListEvents()`:
+
+This function retrieves a list of all events stored in the Events map.
+
+- Acquires a read lock (`ts.mu.RLock()`) to allow concurrent reading.
+- Initializes an empty slice of `Event` pointers (events).
+- Iterates through the events stored in the `Events` map using `ts.Events.Range` and appends each event to the events slice.
+- Returns the list of events.
+
+`BookTickets()`:
+
+The `BookTickets()` function allows booking a specified number of tickets for a given event.
+
+- Acquires a read lock (`ts.mu.RLock()`) to allow concurrent reading.
+- Loads the event associated with the given eventID from the `Events` map.
+- Acquires a write lock on the event (`eventObj.Mu.Lock()`) to prevent concurrent modifications.
+- Checks if there are enough available tickets for booking and generates unique ticket IDs for the booked tickets.
+- Decrements the available ticket count for the event and stores the updated event back in the `Events` map.
+- Returns the list of booked ticket IDs and a potential error.
+
 
 ## Results
 
