@@ -1,6 +1,9 @@
 package Event
 
-import "time"
+import (
+	"sync"
+	"time"
+)
 
 type Event struct {
 	ID               string
@@ -8,4 +11,5 @@ type Event struct {
 	Date             time.Time
 	TotalTickets     int
 	AvailableTickets int
+	Mu               sync.RWMutex
 }

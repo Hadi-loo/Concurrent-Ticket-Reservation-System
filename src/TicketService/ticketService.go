@@ -18,11 +18,14 @@ type TicketService struct {
 
 func InitTicketService(path string, fileName string, ticketService *TicketService) {
 
-	// for linux
-	//data, err := os.ReadFile(path + fileName)
+	ticketService.mu.Lock()
+	defer ticketService.mu.Unlock()
 
-	// for windows
-	data, err := os.ReadFile(fileName)
+	// for Linux
+	data, err := os.ReadFile(path + fileName)
+	// for Windows
+	//data, err := os.ReadFile(fileName)
+
 	if err != nil {
 		log.Println("Error reading file: ", err)
 		return
@@ -61,11 +64,11 @@ func Save(path string, fileName string, ticketService *TicketService) {
 		log.Println("Error marshalling JSON: ", err)
 		return
 	}
-	// for linux
-	//err = os.WriteFile(path+fileName, data, 0644)
 
-	// for windows
-	os.WriteFile(fileName, data, 0644)
+	// for Linux
+	err = os.WriteFile(path+fileName, data, 0644)
+	// for Windows
+	//os.WriteFile(fileName, data, 0644)
 
 	if err != nil {
 		log.Println("Error writing file: ", err)
@@ -86,6 +89,7 @@ func (ts *TicketService) CreateEvent(name string, date time.Time, totalTickets i
 		Date:             date,
 		TotalTickets:     totalTickets,
 		AvailableTickets: totalTickets,
+		Mu:               sync.RWMutex{},
 	}
 
 	ts.Events.Store(event.ID, event)
@@ -93,7 +97,7 @@ func (ts *TicketService) CreateEvent(name string, date time.Time, totalTickets i
 }
 
 func (ts *TicketService) ListEvents() []*Event.Event {
-	// FIXME: Implement concurrency control here
+
 	ts.mu.RLock()
 	defer ts.mu.RUnlock()
 
@@ -107,9 +111,9 @@ func (ts *TicketService) ListEvents() []*Event.Event {
 }
 
 func (ts *TicketService) BookTickets(eventID string, numTickets int) ([]string, error) {
-	// FIXME: Implement concurrency control here
-	ts.mu.Lock()
-	defer ts.mu.Unlock()
+
+	ts.mu.RLock()
+	defer ts.mu.RUnlock()
 
 	event, ok := ts.Events.Load(eventID)
 	if !ok {
@@ -117,6 +121,8 @@ func (ts *TicketService) BookTickets(eventID string, numTickets int) ([]string, 
 	}
 
 	eventObj := event.(*Event.Event)
+	eventObj.Mu.Lock()
+	defer eventObj.Mu.Unlock()
 	if eventObj.AvailableTickets < numTickets {
 		return nil, fmt.Errorf("not enough tickets available for event %s", eventID)
 	}

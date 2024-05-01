@@ -22,10 +22,18 @@ func ListEventsHandler(w http.ResponseWriter, r *http.Request, ticketService *Ti
 	log.Println("List Events Called")
 	events := ticketService.ListEvents()
 
+	for i := range events {
+		events[i].Mu.RLock()
+	}
+
 	response, err := json.Marshal(events)
 	if err != nil {
 		http.Error(w, "Failed to marshal events", http.StatusInternalServerError)
 		return
+	}
+
+	for i := range events {
+		events[i].Mu.RUnlock()
 	}
 
 	w.Header().Set("Content-Type", "application/json")
