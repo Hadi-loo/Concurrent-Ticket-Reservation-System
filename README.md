@@ -267,6 +267,64 @@ The `BookTickets()` function allows booking a specified number of tickets for a 
 - Decrements the available ticket count for the event and stores the updated event back in the `Events` map.
 - Returns the list of booked ticket IDs and a potential error.
 
+### Server
+
+Here, we describe the specifications and features of our HTTP server. This server handles HTTP requests from clients.
+
+Let’s explore the functions and methods associated with this server:
+
+`startServer()`:
+
+It starts the HTTP server to listen on port 8080.
+
+- Sets the port variable to “:8080” and Configures the log prefix to use the value of `LOGS_INFO_PREFIX`.
+- Calls `http.ListenAndServe(port, nil)` to start the server.
+- Logs a message indicating that the server has started on the specified port.
+- If any error occurs during server startup, it logs the error and terminates the program with `log.Fatal`.
+
+`ListEventsHandler()`:
+
+the `ListEventsHandler()` function handles HTTP requests for listing events. In this context:
+
+`w` refers to an `http.ResponseWriter` used to write the HTTP response.
+`r` an `http.Request` representing the incoming HTTP request.
+`ticketService` is a pointer to the `TicketService` instance.
+
+**Purpose**: Retrieves a list of events from the server.
+**Request and Response Body Format**: JSON
+
+- Calls the `ListEvents` method of the `ticketService` to retrieve a list of events.
+- Acquires read locks (`events[i].Mu.RLock()`) for each event.
+- Sets the HTTP response header to indicate that the content type is JSON.
+- Writes the JSON response to the `http.ResponseWriter`.
+- Logs a message indicating that the `/list-events` endpoint has been called.
+
+`CreateEventHandler()`:
+
+It handles HTTP requests for creating a new event.
+
+**Purpose**: Creating an event, and returning the event details in JSON format.
+**Request and Response Body Format**: JSON
+
+- Decodes the incoming JSON request body into an instance of `CreateEventRequest`.
+- Calls the `CreateEvent` method of the `ticketService` to create a new event.
+- Sets the HTTP response header to indicate that the content type is JSON.
+- Writes the JSON response to the `http.ResponseWriter`.
+- Logs a message indicating the successful creation of the new event.
+
+`BookTicketsHandler()`:
+
+This function handles HTTP requests for booking tickets.
+
+**Purpose**: Booking the specified number of tickets, and returning the booked ticket IDs in JSON format.
+**Request and Response Body Format**: JSON
+
+- Decodes the incoming JSON request body into an instance of `BookTicketsRequest`.
+- Calls the `BookTickets` method of the `ticketService` to book the specified number of tickets for the given event.
+- Sets the HTTP response header to indicate that the content type is JSON.
+- Writes the JSON response to the `http.ResponseWriter`.
+- Logs a message indicating the successful booking of tickets.
+
 
 ## Results
 
