@@ -493,7 +493,11 @@ This will send requests to the server and display the responses.
 
 ## Contributions
 
-- **Server File**: Hadi Babaloo, Sina Tabasi
-- **Client File**: Hadi Babaloo, Kasra Haji-Heydari
-- **proto File**: Hadi Babaloo, MohammadSadegh Aboofazeli
-- **Report and Analysis**: MohammadSadegh Aboofazeli, Sina Tabasi, Kasra Haji-Heydari
+- **Server**: Hadi Babaloo, Sina Tabasi
+- **Client**: Hadi Babaloo, MohammadSadegh Aboofazeli
+- **Concurrency Control**: Sina Tabasi, Hadi Babaloo
+- **Client Interface**: Kasra Haji-Heydari
+- **Fairness and Resource Management**: Sina Tabasi
+- **Logging and Error Handling**: MohammadSadegh Aboofazeli, Kasra Haji-Heydari
+- **Caching**: Hadi Babaloo
+- **Report and Analysis**: MohammadSadegh Aboofazeli, Sina Tabasi, Hadi Babaloo
