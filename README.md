@@ -41,10 +41,12 @@ The outcomes of each code functionality are displayed in the images below:
 ### Start Terminal
 
 #### Server
-![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/df2fbd1c-e301-41a2-928d-78eda1d695a7)
+![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/5ebfdd4c-9b02-4959-badf-674d4ca7e14b)
+
 
 #### Client
-![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/24d28151-7175-4732-9e10-8806cea81905)
+![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/e262f8b1-97d1-4d9e-aaae-4a8787f841d9)
+
 
 
 ### Help Command
@@ -56,7 +58,8 @@ help
 ```
 
 #### Client
-![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/d6f740dc-8495-44e3-a098-6b04cb5f55c3)
+![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/158e6763-2eb6-4706-b78e-7c9ae0e72d0f)
+
 
 ### List Command
 
@@ -67,10 +70,12 @@ list
 ```
 
 #### Client 
-![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/ac9dd503-e13b-4ea5-989b-03bf34acdd0a)
+![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/113b8344-80de-4e83-a70b-a9446aa6a909)
+
 
 #### Server 
-![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/b52c6f08-3f76-49ab-b586-4949ae822d40)
+![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/e52ee5c7-2b48-49b2-be3e-16713d07494b)
+
 
 ### Book Command
 
@@ -81,13 +86,16 @@ book [Event_ID] [Number of Tickets]
 ```
 
 #### Client
-![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/46a4b448-819d-48b2-a83a-f1c26fabf94a)
+![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/0589991f-554b-4490-8bf9-412452f6eae5)
 
-![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/a66837c8-f7ad-42b0-ae77-258e25a60682)
+
+![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/bd40e052-15cf-462a-925e-03b99b512b8b)
+
 
 
 #### server
-![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/f15ffbd2-6806-4a59-904c-ca892d982f29)
+![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/172ffb1a-bc29-4aa9-8137-3ea62235a17b)
+
 
 ### Create Command
 
@@ -98,12 +106,15 @@ create [Name] [Date] [Total Tickets]
 With the following command, you can generate an Event with the specified details:
 
 #### Client
-![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/86a3d389-79e0-4fcd-a344-65d829eed52e)
-![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/b74e7c38-6b8d-4344-b5c1-46faa40350bb)
+![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/fd9791f6-549d-4a05-b628-57648458def6)
+
+![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/3257cf71-a286-4e5d-9e33-e81e02b8bc0f)
+
 
 
 #### Server
-![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/4e19cc55-755b-41f9-9d3a-92ec98c36e14)
+![image](https://github.com/Hadi-loo/Concurrent-Ticket-Reservation-System/assets/88041997/c6dc7f72-8ce1-4fe0-b341-d4852b4ff878)
+
 
 
 ## How to run
