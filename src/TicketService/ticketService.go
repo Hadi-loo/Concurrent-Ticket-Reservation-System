@@ -13,6 +13,7 @@ import (
 
 type TicketService struct {
 	Events sync.Map
+	mu     sync.RWMutex
 }
 
 func InitTicketService(path string, fileName string, ticketService *TicketService) {
@@ -44,6 +45,10 @@ func InitTicketService(path string, fileName string, ticketService *TicketServic
 }
 
 func Save(path string, fileName string, ticketService *TicketService) {
+
+	ticketService.mu.Lock()
+	defer ticketService.mu.Unlock()
+
 	var events []Event.Event
 	ticketService.Events.Range(func(key, value interface{}) bool {
 		event := value.(*Event.Event)
@@ -71,6 +76,10 @@ func Save(path string, fileName string, ticketService *TicketService) {
 }
 
 func (ts *TicketService) CreateEvent(name string, date time.Time, totalTickets int) (*Event.Event, error) {
+
+	ts.mu.Lock()
+	defer ts.mu.Unlock()
+
 	event := &Event.Event{
 		ID:               Utils.GenerateUUID(),
 		Name:             name,
@@ -85,6 +94,8 @@ func (ts *TicketService) CreateEvent(name string, date time.Time, totalTickets i
 
 func (ts *TicketService) ListEvents() []*Event.Event {
 	// FIXME: Implement concurrency control here
+	ts.mu.RLock()
+	defer ts.mu.RUnlock()
 
 	var events []*Event.Event
 	ts.Events.Range(func(key, value interface{}) bool {
@@ -97,6 +108,8 @@ func (ts *TicketService) ListEvents() []*Event.Event {
 
 func (ts *TicketService) BookTickets(eventID string, numTickets int) ([]string, error) {
 	// FIXME: Implement concurrency control here
+	ts.mu.Lock()
+	defer ts.mu.Unlock()
 
 	event, ok := ts.Events.Load(eventID)
 	if !ok {
