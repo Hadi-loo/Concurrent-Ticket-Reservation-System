@@ -325,6 +325,49 @@ This function handles HTTP requests for booking tickets.
 - Writes the JSON response to the `http.ResponseWriter`.
 - Logs a message indicating the successful booking of tickets.
 
+### Client
+
+Let’s explore the specifications and features of our HTTP clients. Clients create HTTP requests to communicate with servers and retrieve data or perform actions. These requests allow clients to interact with various resources hosted on the server.
+
+Now, we’ll delve into the functions and methods related to the client.
+
+ `SetupClient()`:
+
+This method configures the client with a timeout value of 10 seconds.
+
+`ListEventsCommandHandler()`:
+
+**Command**: `list`
+
+It handles the “list” command by sending an HTTP request to retrieve a list of events.
+
+- Checks if any additional arguments were provided (prints a warning if so).
+- Creates an HTTP GET request to the `ListEventsUrl`.
+- Sends the request using the client and reads the response body.
+- Returns the response body as a byte slice. Otherwise, if the response status code is not `OK (200)`, logs an error and returns `nil`.
+
+`CreateEventCommandHandler()`:
+
+**Command**: `create [name] [date] [totalTickets]`
+
+This function handles the “create” command by sending an HTTP request to create a new event. `client` is a pointer to an `http.Client` instance and `args` is a slice of strings representing the command arguments (event name, date, and total tickets).
+
+- Validates that exactly three arguments are provided; otherwise, logs an error and returns nil.
+- Creates an HTTP POST request to the CreateEventUrl with the request body.
+- Sets the request header to indicate that the content type is JSON and sends the request using the client.
+- Reads the response body and returns the response body as a byte slice if the response status code is `OK (200)`. Otherwise, logs an error and returns nil.
+
+
+`BookTicketsCommandHandler()`:
+
+**Command**: `book [id] [tickets]`
+
+It handles the “book” command by sending an HTTP request to book tickets for a specific event. `client` is a pointer to an `http.Client` instance and `args` is a slice of strings representing the command arguments (event ID and number of tickets).
+
+- Validates that exactly two arguments are provided; otherwise, logs an error and returns `nil`.
+- Creates an HTTP POST request to the BookTicketsUrl with the request body.
+- Sets the request header to indicate that the content type is JSON and sends the request using the client.
+- Reads the response body and returns the response body as a byte slice if the response status code is `OK (200)`. Otherwise, logs an error and returns `nil`.
 
 ## Results
 
