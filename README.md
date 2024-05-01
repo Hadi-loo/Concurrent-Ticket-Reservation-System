@@ -11,6 +11,9 @@ In this project, we have developed a server-client model for ticket reservation 
   - [Book Command](#book-command)
   - [Create Command](#create-command)
 - [How to run](#how-to-run)
+  - [1. Compile Dependencies](#1-compile-dependencies)
+  - [2. Run Server](#2-run-server)
+  - [3. Run Client](#3-run-client)
 - [Contributions](#contributions)
 
 ## Requirements
@@ -88,6 +91,10 @@ book [Event_ID] [Number of Tickets]
 
 ### Create Command
 
+```txt
+create [Name] [Date] [Total Tickets]
+```
+
 With the following command, you can generate an Event with the specified details:
 
 #### Client
@@ -111,7 +118,7 @@ Ensure that you have Go installed on your system. Navigate to the root directory
 go mod download
 ```
 
-### 3. Run Server
+### 2. Run Server
 
 To start the server, run the following command:
 
@@ -121,7 +128,7 @@ go run server/server.go
 
 The server will start listening for incoming clients request.
 
-### 4. Run Client
+### 3. Run Client
 
 To execute the client code, run the following command:
 
