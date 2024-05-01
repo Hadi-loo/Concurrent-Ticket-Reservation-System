@@ -6,8 +6,11 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"sync"
 	"time"
 )
+
+var mu sync.RWMutex
 
 func startServer() {
 	port := ":8080"
@@ -17,6 +20,9 @@ func startServer() {
 }
 
 func ListEventsHandler(w http.ResponseWriter, r *http.Request, ticketService *TicketService.TicketService) {
+	mu.RLock()
+	defer mu.RUnlock()
+
 	log.SetPrefix(LOGS_INFO_PREFIX)
 	log.Println("List Events Called")
 	events := ticketService.ListEvents()
@@ -36,6 +42,9 @@ func ListEventsHandler(w http.ResponseWriter, r *http.Request, ticketService *Ti
 }
 
 func CreateEventHandler(w http.ResponseWriter, r *http.Request, ticketService *TicketService.TicketService) {
+	mu.Lock()
+	defer mu.Unlock()
+
 	type CreateEventRequest struct {
 		Name         string `json:"name"`
 		Date         string `json:"date"`
@@ -84,6 +93,9 @@ func CreateEventHandler(w http.ResponseWriter, r *http.Request, ticketService *T
 }
 
 func BookTicketsHandler(w http.ResponseWriter, r *http.Request, ticketService *TicketService.TicketService) {
+	mu.Lock()
+	defer mu.Unlock()
+
 	type BookTicketsRequest struct {
 		ID      string `json:"eventID"`
 		Tickets string `json:"numTickets"`

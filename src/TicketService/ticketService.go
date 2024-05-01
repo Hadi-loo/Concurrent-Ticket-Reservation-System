@@ -16,7 +16,12 @@ type TicketService struct {
 }
 
 func InitTicketService(path string, fileName string, ticketService *TicketService) {
-	data, err := os.ReadFile(path + fileName)
+
+	// for linux
+	//data, err := os.ReadFile(path + fileName)
+
+	// for windows
+	data, err := os.ReadFile(fileName)
 	if err != nil {
 		log.Println("Error reading file: ", err)
 		return
@@ -51,8 +56,12 @@ func Save(path string, fileName string, ticketService *TicketService) {
 		log.Println("Error marshalling JSON: ", err)
 		return
 	}
+	// for linux
+	//err = os.WriteFile(path+fileName, data, 0644)
 
-	err = os.WriteFile(path+fileName, data, 0644)
+	// for windows
+	os.WriteFile(fileName, data, 0644)
+
 	if err != nil {
 		log.Println("Error writing file: ", err)
 		return
